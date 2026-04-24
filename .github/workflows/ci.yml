@@ -16,6 +16,7 @@ jobs:
           node-version: '18'
 
       - run: npm ci
+
       - run: npx jest
 
       - name: Login Docker Hub
@@ -28,4 +29,5 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/hola-mundo-app
 
       - name: Deploy Render
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
